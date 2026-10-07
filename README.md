@@ -1,5 +1,7 @@
 # Paper Airplane Chase GX
 
+Sister project to [Bird & Beans GX](https://github.com/cmyksoda/Bird-and-Beans-GX)
+
 A Wii homebrew port of **Paper Airplane Chase**, with Endless, all eight Time Attack courses and local two-player Race, original gameplay code, music and sound effects, and a new title screen and pause menu.
 
 |Title Screen|Pause Menu|Graphics Options|
@@ -36,17 +38,15 @@ In Race, whoever starts the game is Player 1. Press a button or move the stick/D
 
 Open **Pause → Graphics Options** to toggle **240p at 60 Hz** and choose between **Fixed and Fill** scaling.
 
-Fixed keeps the original proportions. Unlike Bird & Beans GX, gameplay shows two original screens together: a continuous 256×384 tower in single-player, or two 256×192 views side by side in Race. In normal 4:3 output, Fixed gameplay uses the original pixels at **1×**, while the menus use **2×**. Doubling the entire gameplay view would not fit on screen. At 240p, gameplay is reduced vertically; it is not a pixel-perfect 2× mode.
+Paper Airplane Chase shows both of the original DS screens at once: stacked into one tall tower in Endless and Time Attack, or side by side in Race. Fixed keeps the original pixels at their original size, since doubling them like Bird & Beans GX does wouldn't fit on a TV. Fill detects the Wii’s 4:3 or 16:9 setting and enlarges the image to fill as much of the screen as it can. Scaling applies to gameplay; menus always stay the same size, and the title and setup screens always use the full screen.
 
-240p keeps the full gameplay view and blends source rows when reducing it, so thin scrolling ledges are not discarded on alternate rows. Menus keep complete font rows at the Fixed size.
+240p has half as many lines to draw with, so it blends neighboring lines together to keep the whole tower on screen. That way, thin ledges don't flicker as they scroll by.
 
-Fill enlarges the gameplay composition to use more of the screen and follows the Wii’s 4:3 or 16:9 setting. Scaling applies to gameplay; menus always stay at the Fixed size, and the title and setup screens always use the full screen.
-
-Widescreen systems also show **Aspect Ratio** for the option to use a centered 4:3 view while in Fill mode. Widescreen aspect correction resamples horizontally, so the exact 1× gameplay / 2× menu pixel grids apply to normal 4:3 output.
+Widescreen systems also show **Aspect Ratio** for the option to use a centered 4:3 view while in Fill mode.
 
 All graphics options are saved when you leave the menu and restored on the next launch.
 
-Graphics options, the Endless high score and best completed time for each of the eight Time Attack courses are saved in `apps/paperplane/scores.dat`. Race does not save win totals. Records are saved on game over, restart, return to title or a clean exit. Keep that file when updating. Powering off during a run can lose an unsaved record.
+Your Endless high score, your best time on each Time Attack course and your graphics options are saved in `apps/paperplane/scores.dat`. Race wins aren't saved. Records are saved on game over, restart, return to title or a clean exit. Keep that file when updating. Powering off during a run can lose an unsaved record.
 
 ## License
 

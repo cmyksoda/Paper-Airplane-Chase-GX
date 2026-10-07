@@ -1,0 +1,5 @@
+Project logo modification: the GX addition was created by me, Jaxi/cmyksoda, and is licensed under GPL-3.0-only. I only claim ownership of this modification, not the original logo.
+
+Original Paper Airplane Chase logo: Nintendo's property. The original logo is not covered by the port's GPLv3 license. No ownership of Nintendo's artwork or permission from its copyright holder is asserted.
+
+Game graphics shown in screenshots also belong to their original copyright holders and are not covered by the port's GPLv3 license.

@@ -2,8 +2,8 @@
 <app version="1">
   <name>Paper Airplane Chase GX</name>
   <coder>cmyksoda</coder>
-  <version>1.0.1</version>
-  <release_date>20261007</release_date>
+  <version>1.0.2</version>
+  <release_date>20261008</release_date>
   <short_description>Paper Airplane Chase for Wii!</short_description>
   <long_description>Native port of the DSiWare release, Paper Airplane Chase.
 Playable with Wii Remote, Nunchuk, Classic Controller and GameCube Controller.

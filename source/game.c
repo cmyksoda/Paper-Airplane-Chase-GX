@@ -144,6 +144,8 @@ static int hook(VM *m, uint32_t a) {
     uint32_t x = m->r[0], y = m->r[1], z = m->r[2], t = m->r[3], ret = x, sp = m->r[13];
 
     if (a == 0x0200b078 || a == 0x0200be1c) g->dead = 1;
+    // Keeps the original Play Again box hidden; Time Attack and Race show it behind ui_over.
+    if (a == 0x02008934) return 1;
     if ((a >= 0x02005708 && a < 0x02009080) || (a >= 0x0200930c && a < 0x0200c030)
         || (a >= 0x02036c48 && a < 0x02036d04) || (a >= 0x0203c064 && a < 0x0203d38c)
         || (a >= 0x020108e8 && a < 0x02010924) || (a >= 0x02013190 && a < 0x02013270)

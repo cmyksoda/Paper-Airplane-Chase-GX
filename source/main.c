@@ -235,7 +235,7 @@ int main(int argc, char **argv) {
     highs_read();
 
     int mode = smoke ? smoke_mode : 0, menu = !smoke, pause = 0, selection = 0, graphics = 0,
-        graphics_selection = 0, was_dead = 0;
+        graphics_selection = 0, was_dead = 0, courses = 0, course_selection = 0;
     unsigned prev = 0, total = 0, uiticks = 0;
     start(mode, smoke);
     if (menu) title_music();
@@ -264,24 +264,51 @@ int main(int argc, char **argv) {
             uiacc -= step;
         }
 
-        if (menu) {
+        if (menu && courses) {
+            if (down & (KEY_BACK | KEY_MENU)) {
+                courses = 0;
+                audio_play(&sound, AUDIO_UI_PLAYER, 5);
+            } else if (down & (KEY_ACTION | KEY_PAUSE)) {
+                if (course_selection == 8) {
+                    courses = 0;
+                    audio_play(&sound, AUDIO_UI_PLAYER, 5);
+                } else {
+                    game.course = course_selection;
+                    start(mode, 0);
+                    menu = courses = pause = graphics = was_dead = 0;
+                    acc = 0;
+                }
+            } else if (down & (KEY_LEFT | KEY_RIGHT | KEY_UP | KEY_DOWN)) {
+                int row = course_selection / 3, column = course_selection % 3;
+                if (down & KEY_LEFT) column = (column + 2) % 3;
+                if (down & KEY_RIGHT) column = (column + 1) % 3;
+                if (down & KEY_UP) row = (row + 2) % 3;
+                if (down & KEY_DOWN) row = (row + 1) % 3;
+                course_selection = row * 3 + column;
+                audio_play(&sound, AUDIO_UI_PLAYER, 6);
+            }
+        } else if (menu) {
             if (down & KEY_MENU) break;
-            if (down & KEY_LEFT) {
+            // A bare Remote reads as sideways until its first A press, so an upright
+            // grip's right arrives as up. Up therefore steps right, and down steps left.
+            if (down & (KEY_LEFT | KEY_DOWN)) {
                 mode = (mode + 2) % 3;
                 audio_play(&sound, AUDIO_UI_PLAYER, 6);
             }
-            if (down & KEY_RIGHT) {
+            if (down & (KEY_RIGHT | KEY_UP)) {
                 mode = (mode + 1) % 3;
                 audio_play(&sound, AUDIO_UI_PLAYER, 6);
             }
-            if (mode == 1 && (down & (KEY_UP | KEY_DOWN))) {
-                game.course = (game.course + (down & KEY_DOWN ? 1 : 7)) % 8;
-                audio_play(&sound, AUDIO_UI_PLAYER, 6);
-            }
             if ((down & (KEY_ACTION | KEY_PAUSE)) && !(down & KEY_BACK)) {
-                start(mode, 0);
-                menu = pause = graphics = was_dead = 0;
-                acc = 0;
+                if (mode == 1) {
+                    courses = 1;
+                    course_selection = game.course;
+                    audio_play(&sound, AUDIO_UI_PLAYER, 6);
+                } else {
+                    start(mode, 0);
+                    menu = pause = graphics = was_dead = 0;
+                    acc = 0;
+                }
             }
         } else if (pause) {
             if (graphics) {
@@ -401,7 +428,9 @@ int main(int argc, char **argv) {
         platform_audio(&sound);
         audio_commands(&sound, &game);
 
-        if (menu)
+        if (menu && courses)
+            ui_courses(&game, course_selection, uiticks);
+        else if (menu)
             ui_title(&game, mode, uiticks);
         else {
             if (platform_240p()) {

@@ -388,5 +388,11 @@ void text_draw_scaled(Game *g, int x, int y, const char *s, uint16_t c, int scal
                 for (int a = 0; a < scale; a++)
                     for (int b = 0; b < scale; b++)
                         pixel(g, x + (4 - yy * 4 / 6) * scale + a, y + yy * scale + b, c);
+        if (ch == '\'' || ch == '"')
+            for (int col = ch == '"' ? 1 : 2; col <= (ch == '"' ? 3 : 2); col += 2)
+                for (int yy = 0; yy < 3; yy++)
+                    for (int a = 0; a < scale; a++)
+                        for (int b = 0; b < scale; b++)
+                            pixel(g, x + col * scale + a, y + yy * scale + b, c);
     }
 }

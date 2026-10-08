@@ -28,7 +28,7 @@ The app checks the ROM and prepares its data automatically on first launch. Late
 | Classic Controller | D-pad / left stick | A | Plus | Home |
 | GameCube Controller | D-pad / stick | A | Start | Z |
 
-In menus, select with A / 2 and go back with B. Left/right chooses a game; up/down chooses a Time Attack course. Pressing A on a bare Wii Remote selects vertical controls; pressing 1 or 2 selects horizontal controls. B keeps the current grip.
+In menus, select with A / 2 and go back with B. Left/right chooses a game, and Time Attack opens a menu for choosing one of its eight courses. Pressing A on a bare Wii Remote selects vertical controls; pressing 1 or 2 selects horizontal controls. B keeps the current grip.
 
 In Endless and Time Attack, press a button or move the stick on another controller to switch all controls to it, including during play.
 

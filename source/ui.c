@@ -51,18 +51,23 @@ static void title_logo(Game *g, int top) {
     }
 }
 
+// Leaves the original 256x192 backdrop in g->pixels, so callers can restore from it.
+static void backdrop(Game *g, uint16_t *out) {
+    game_canvas(g, 0);
+    game_background(g, 36, 27, 24);
+    for (int y = 0; y < 480; y++)
+        for (int x = 0; x < 640; x++)
+            out[y * 640 + x] = g->pixels[(y / 2 % 192) * 256 + x / 2 % 256];
+    game_canvas(g, CANVAS_FULLSCREEN);
+}
+
 void ui_title(Game *g, int mode, unsigned tick) {
     static uint16_t title[640 * 480];
     static int ready;
     const uint16_t gray = 0x528a;
 
     if (!ready) {
-        game_canvas(g, 0);
-        game_background(g, 36, 27, 24);
-        for (int y = 0; y < 480; y++)
-            for (int x = 0; x < 640; x++)
-                title[y * 640 + x] = g->pixels[(y / 2 % 192) * 256 + x / 2 % 256];
-        game_canvas(g, CANVAS_FULLSCREEN);
+        backdrop(g, title);
         memcpy(g->menu_pixels, title, sizeof title);
         title_logo(g, 36);
         memcpy(title, g->menu_pixels, sizeof title);
@@ -85,25 +90,49 @@ void ui_title(Game *g, int mode, unsigned tick) {
     }
     game_art(g, 46, 32, 23, game_animation_cell(g, 52, 0, tick), 138 + mode * 196, 319, 1.5f);
 
-    char s[80];
     if (mode == 0)
         center(g, 368, "FLY AS FAR AS YOU CAN", gray, 2);
-    else if (mode == 1) {
-        snprintf(s, sizeof s, "COURSE %d OF 8", g->course + 1);
-        center(g, 358, s, gray, 2);
-        center(g, 386, "UP / DOWN: CHANGE COURSE", gray, 2);
-        unsigned t = g->high[g->course + 1];
-        if (t)
-            snprintf(s, sizeof s, "BEST %u:%02u.%02u", t / 3600, t / 60 % 60, t % 60 * 100 / 60);
-        else
-            snprintf(s, sizeof s, "NO RECORD YET");
-        center(g, 414, s, gray, 2);
-    } else {
+    else if (mode == 1)
+        center(g, 368, "BEAT THE CLOCK ON EIGHT COURSES", gray, 2);
+    else {
         center(g, 358, "STARTING CONTROLLER IS PLAYER 1", gray, 2);
         center(g, 386, "PLAYER 2 JOINS WITH ANY INPUT", gray, 2);
     }
 
     center(g, 450, "A / 2: START    HOME / Z: EXIT", gray, 2);
+}
+
+// The original Time Attack grid: eight Stage tiles and a Menu tile, at 2x.
+void ui_courses(Game *g, int selected, unsigned tick) {
+    const uint16_t gray = 0x528a, tile_purple = 0x725f, button_gray = 0x6b4d;
+    char s[16];
+
+    backdrop(g, g->menu_pixels);
+    center(g, 20, "TIME ATTACK", gray, 2);
+    for (int i = 0; i < 9; i++) {
+        int x = 160 + i % 3 * 160, y = 104 + i / 3 * 128;
+        unsigned t = i < 8 ? g->high[i + 1] : 0;
+        if (i == 8) {
+            // The original writes the label into this strip at runtime; it overhangs the button.
+            game_art(g, 46, 32, 23, 183, x, y, 2);
+            for (int yy = y - 16; yy <= y + 16; yy++)
+                for (int xx = x - 76; xx <= x + 115; xx++)
+                    g->menu_pixels[yy * 640 + xx] =
+                        xx <= x + 75 ? button_gray : g->pixels[(yy / 2 % 192) * 256 + xx / 2 % 256];
+            text_draw_scaled(g, x - 23, y - 7, "MENU", 0xffdf, 2);
+        } else if (t) {
+            game_art(g, 46, 32, 23, 175 + i, x, y, 2);
+            rect(g, x - 44, y + 7, 96, 20, tile_purple);
+            snprintf(s, sizeof s, "%u'%02u\"%02u", t / 3600, t / 60 % 60, t % 60 * 100 / 60);
+            text_draw_scaled(g, x + 4 - ((int)strlen(s) * 12 - 2) / 2, y + 10, s, 0, 2);
+        } else
+            game_art(g, 46, 32, 23, 184 + i, x, y, 2);
+    }
+
+    int x = 160 + selected % 3 * 160, y = 104 + selected / 3 * 128;
+    game_art(g, 46, 32, 23, game_animation_cell(g, 52, 4, tick), x, y, 2);
+    game_art(g, 46, 32, 23, game_animation_cell(g, 52, 0, tick), x - 18, y + 22, 2);
+    center(g, 450, "A / 2: START    B: BACK", gray, 2);
 }
 
 void ui_setup(Game *g, const char *heading, const char *line1, const char *line2, int busy) {

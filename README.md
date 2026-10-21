@@ -48,9 +48,17 @@ All graphics options are saved when you leave the menu and restored on the next 
 
 Your Endless high score, your best time on each Time Attack course and your graphics options are saved in `apps/paperplane/scores.dat`. Race wins aren't saved. Records are saved on game over, restart, return to title or a clean exit. Keep that file when updating. Powering off during a run can lose an unsaved record.
 
+## Credits
+
+- **Paper Airplane Chase** by Nintendo, the game this port runs, read from your own DSiWare ROM
+- **SSEQPlayer** by Naram Qashat (CyberBotX), from [kode54's repository](https://github.com/kode54/SSEQPlayer) and adapted from fincs's [FeOS Sound System](https://github.com/fincs/FSS), for playing the game's music and sound effects
+- **ndspy** by RoadrunnerWMC, the reference for the ROM's LZ10 and backward ARM9 decompression; ndspy credits DSDecmp and NSMBe/Elitemap for those
+- **libogc** by Michael Wiedenbauer (shagkur) and Dave Murphy (WinterMute), with **libfat** by Michael "Chishm" Chisholm for the SD card, **ASND** by Hermes for sound, and **wiiuse** for the Wii Remote, from devkitPro's libraries
+- **devkitPPC** by devkitPro, with **newlib** and the **GCC runtime library**
+
 ## License
 
-The port code and documentation are **GPLv3**. Nintendo game data and the original Nintendo logo are excluded; third-party components retain their own licenses. See [license notices](licenses/README.md).
+The port code and documentation are free software under the [GNU General Public License, version 3](LICENSE). Some parts use other licenses: SSEQPlayer is WTFPL version 2, the decompression code adapted from ndspy is GPL version 3 or later (used here under version 3), and the other third-party components retain their own licenses. Nintendo game data and the original Nintendo logo are excluded. All the texts are in [`licenses/`](licenses/), and the [license notices](licenses/README.md) say which applies where.
 
 For the project logo, I only claim ownership of my modification: the **GX** addition. The original **Paper Airplane Chase** logo is Nintendo’s property. See [artwork attribution](licenses/Artwork.txt).
 

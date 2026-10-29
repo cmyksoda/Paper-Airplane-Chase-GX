@@ -58,7 +58,7 @@ Your Endless high score, your best time on each Time Attack course and your grap
 
 ## License
 
-The port code and documentation are free software under the [GNU General Public License, version 3](LICENSE). Some parts use other licenses: SSEQPlayer is WTFPL version 2, the decompression code adapted from ndspy is GPL version 3 or later (used here under version 3), and the other third-party components retain their own licenses. Nintendo game data and the original Nintendo logo are excluded. All the texts are in [`licenses/`](licenses/), and the [license notices](licenses/README.md) say which applies where.
+The port code and documentation are free software under the [GNU General Public License, version 3 or later](LICENSE). Some parts use other licenses: SSEQPlayer is WTFPL version 2, the decompression code adapted from ndspy is GPL version 3 or later, and the other third-party components retain their own licenses. Nintendo game data and the original Nintendo logo are excluded. All the texts are in [`licenses/`](licenses/), and the [license notices](licenses/README.md) say which applies where.
 
 For the project logo, I only claim ownership of my modification: the **GX** addition. The original **Paper Airplane Chase** logo is Nintendo’s property. See [artwork attribution](licenses/Artwork.txt).
 

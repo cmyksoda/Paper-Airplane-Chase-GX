@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: GPL-3.0-or-later
 #ifndef PAP_PLATFORM_H
 #define PAP_PLATFORM_H
 #include "audio.h"

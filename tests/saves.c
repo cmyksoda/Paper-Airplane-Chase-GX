@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Exercise the app's actual persistence code without launching video or audio.
 #define main paperplane_main
 #include "../source/main.c"

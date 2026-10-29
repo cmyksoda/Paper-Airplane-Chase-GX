@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Exercise the Wii queue against rejected refills and asynchronous consumption."""
 
 from pathlib import Path

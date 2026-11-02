@@ -13,12 +13,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gccore.h>
+#include <wiiuse/wpad.h>
 #include "extrainput.h"
 
 static inline void ExtraInput_PADInit(void)
 {
 	PAD_Init();
 	ExtraInput_Init();
+}
+
+static inline s32 ExtraInput_WPADShutdown(void)
+{
+	ExtraInput_Shutdown();
+	return WPAD_Shutdown();
 }
 
 // The GameCube controller adapter for Wii U: a real pad on a port wins, otherwise the adapter's pad is that port's pad
@@ -67,6 +74,7 @@ static inline u8 ExtraInput_PADTrigger(int port, u8 real, int right)
 	return v > real ? v : real;
 }
 
+#define WPAD_Shutdown()              ExtraInput_WPADShutdown()
 #define PAD_Init()                   ExtraInput_PADInit()
 #define PAD_ScanPads()               ExtraInput_PADScanPads()
 #define PAD_ButtonsHeld(c)           ExtraInput_PADButtons((c), PAD_ButtonsHeld(c), 0)

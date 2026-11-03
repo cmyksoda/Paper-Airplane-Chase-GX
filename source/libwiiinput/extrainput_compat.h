@@ -8,7 +8,7 @@
  * GameCube adapter's ports as well. Nothing in the app's own input code changes.
  */
 
-#ifdef HW_RVL
+#if defined(HW_RVL) && !defined(__ASSEMBLER__) /* -include reaches the full build's embedded.S too */
 
 #include <stdlib.h>
 #include <string.h>

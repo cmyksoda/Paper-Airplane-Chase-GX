@@ -34,6 +34,10 @@ In Endless and Time Attack, press a button or move the stick on another controll
 
 In Race, whoever starts the game is Player 1. Press a button or move the stick/D-pad on another controller to join as Player 2 and start the countdown. Idle controllers cannot claim a slot. Release any input held before Race started and press it again to join. Assignments stay fixed through restarts until returning to the title. Either player can pause; Player 1 operates the menus. Disconnecting an assigned controller pauses the race.
 
+## GameCube controller adapter
+
+The GameCube controller adapter for Wii U (and third-party ones that copy it) works: its four ports read as GameCube controllers. The driver is from [libwiiinput](https://github.com/quatric/libwiiinput) and lives in `source/libwiiinput/`.
+
 ## Display and saves
 
 Open **Pause → Graphics Options** to toggle **240p at 60 Hz** and choose between **Fixed and Fill** scaling.
@@ -53,6 +57,7 @@ Your Endless high score, your best time on each Time Attack course and your grap
 - **Paper Airplane Chase** by Nintendo, the game this port runs, read from your own DSiWare ROM
 - **SSEQPlayer** by Naram Qashat (CyberBotX), from [kode54's repository](https://github.com/kode54/SSEQPlayer) and adapted from fincs's [FeOS Sound System](https://github.com/fincs/FSS), for playing the game's music and sound effects
 - **ndspy** by RoadrunnerWMC, the reference for the ROM's LZ10 and backward ARM9 decompression; ndspy credits DSDecmp and NSMBe/Elitemap for those
+- **libwiiinput** by quatric, from [its repository](https://github.com/quatric/libwiiinput), for the GameCube controller adapter for Wii U, with the adapter driver from [RiftWii](https://github.com/KakarottoCake/Riftwii) by the RiftWii contributors; RiftWii credits Alex Chadwick's [wup-028-bslug](https://github.com/Chadderz121/wup-028-bslug) and FIX94's [Nintendont](https://github.com/FIX94/Nintendont) and its contributors for it
 - **libogc** by Michael Wiedenbauer (shagkur) and Dave Murphy (WinterMute), with **libfat** by Michael "Chishm" Chisholm for the SD card, **ASND** by Hermes for sound, and **wiiuse** for the Wii Remote, from devkitPro's libraries
 - **devkitPPC** by devkitPro, with **newlib** and the **GCC runtime library**
 
@@ -63,7 +68,3 @@ The port code and documentation are free software under the [GNU General Public 
 For the project logo, I only claim ownership of my modification: the **GX** addition. The original **Paper Airplane Chase** logo is Nintendo’s property. See [artwork attribution](licenses/Artwork.txt).
 
 *This project was made with AI assistance. For more information, see [my AI usage statement](https://github.com/cmyksoda/cmyksoda/blob/main/AI_USAGE.md).*
-
-## GameCube controller adapter
-
-The GameCube controller adapter for Wii U (and third-party ones that copy it) works on Wii U in vWii mode: its four ports read as GameCube pads, rumble aside, with no mapping of their own. The driver is from [libwiiinput](https://github.com/quatric/libwiiinput) and lives in `source/libwiiinput/`; `extrainput_compat.h` wraps the program's own `PAD_*` calls, so no input code in the program had to change. The files in that folder are GPL-3.0-or-later, like the rest of the port.

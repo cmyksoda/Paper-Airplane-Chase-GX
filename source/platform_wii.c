@@ -46,9 +46,7 @@ static int audio_thread_started, audio_running;
 static Audio *audio_source;
 static unsigned char audio_stack[32 * 1024] ATTRIBUTE_ALIGN(32);
 
-static void reset(u32 a, void *b) {
-    (void)a;
-    (void)b;
+static void reset(void) {
     quit = 1;
 }
 

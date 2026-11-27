@@ -22,10 +22,10 @@ static inline void ExtraInput_PADInit(void)
 	ExtraInput_Init();
 }
 
-static inline s32 ExtraInput_WPADShutdown(void)
+static inline void ExtraInput_WPADShutdown(void)
 {
 	ExtraInput_Shutdown();
-	return WPAD_Shutdown();
+	WPAD_Shutdown(); // void in libogc2
 }
 
 // The GameCube controller adapter for Wii U: a real pad on a port wins, otherwise the adapter's pad is that port's pad
